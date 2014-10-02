@@ -7,14 +7,15 @@ Created on 1 Oct 2014
 import unittest
 from Seguridad import clsSeguridad
 
+seg=clsSeguridad()
 
 class Test(unittest.TestCase):
 
-
-    def testRegistro(self): #se agrega siguiendo el enfoque TDD
-        seg=clsSeguridad()
+    def testRegistroIni(self):
         seg.registrarUsuario()
 
+    def testRegistroBien(self): 
+        seg.registrarUsuario("jon@blahmail.com","a12345F6789fg","a12345F6789fg")
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
