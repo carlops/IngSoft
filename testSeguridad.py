@@ -29,6 +29,30 @@ class Test(unittest.TestCase):
         seg.registrarUsuario("jon3@blahmail.com","a12345F6789fg","a12345F6789fg")
         seg.AutenticarUsuario("jon3@mail.com","a12345F6789fg")
         
+    # Frontera
+    def testStringGrande(self):
+        muchasA = 'a'*(2**20)
+        seg.registrarUsuario("{}@b.ve".format(muchasA), "a12345F6789fg", "a12345F6789fg")
+        
+    def tesStringVacioEmail(self):
+        seg.registrarUsuario("","a12345F6789fg","a12345F6789fg")
+        
+    def tesStringVacioClave(self):
+        seg.registrarUsuario("jon3@blahmail.com","","")
+        
+    def testStringsVacios(self):
+        seg.registrarUsuario("","","")
+        
+    # Malicia   
+    def testStringPequeno(self):
+        seg.registrarUsuario("@.com", "a12345F6789fg", "a12345F6789fg")
+        
+    def testDoblePuntoHost(self):
+        seg.registrarUsuario("jon3@blahmail.com.ve", "a12345F6789fg", "a12345F6789fg")
+        seg.AutenticarUsuario("jon3@blahmail.com.ve","a12345F6789fg")
+        
+    def testCaracterEspecialEmail(self):
+        seg.registrarUsuario("hola+2@blahmail.com","a12345F6789fg","a12345F6789fg")
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

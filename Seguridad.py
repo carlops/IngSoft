@@ -25,13 +25,13 @@ class clsSeguridad(object):
             #(re.match(r'\w(\w|_|\.|-)*@\w+\.\w+',correo)):
             correoValido=True
         else:
-            print ("Dirección de correo electrónico inválido")
+            print ("Direccion de correo electronico invalido")
         
         if ((isinstance(clave1, str))and(isinstance(clave2, str))and(clave1==clave2)):
             if self.ERclave.match(clave1):
                 claveValida=True
         if not (claveValida):
-            print("Clave inválida")
+            print("Clave invalida")
             
         if (claveValida and correoValido):
             claveCodificada=clave1[::-1]
