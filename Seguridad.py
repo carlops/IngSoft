@@ -10,8 +10,8 @@ class clsSeguridad(object):
     '''
     classdocs
     '''
-    ERcorreo = re.compile(r'\w(\w|_|\.|-)*@\w+\.\w+')
-    ERclave = re.compile(r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-z]){3,15}.{8,16}$')
+    ERcorreo = re.compile(r'\w(\w|_|\.|-|\+)*@\w+\.\w+')
+    ERclave = re.compile(r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=(.*[a-zA-z]){3}).{8,16}$')
     Diccionario = {}
     def __init__(self):
         '''
@@ -22,7 +22,6 @@ class clsSeguridad(object):
         correoValido=False
         claveValida=False
         if (isinstance(correo,str)and(self.ERcorreo.match(correo))):
-            #(re.match(r'\w(\w|_|\.|-)*@\w+\.\w+',correo)):
             correoValido=True
         else:
             print ("Direccion de correo electronico invalido")
@@ -36,14 +35,12 @@ class clsSeguridad(object):
         if (claveValida and correoValido):
             claveCodificada=clave1[::-1]
             self.Diccionario[correo]=claveCodificada;
-#            print(self.Diccionario)
+            print("Usuario registrado exitosamente")
+        return (claveValida and correoValido)
             
     def AutenticarUsuario(self,correo,clave):
         correoValido=False
         claveValida=False
-        print(self.Diccionario)
-        print(correo)
-        print(correo in self.Diccionario)
         if isinstance(correo,str) and self.ERcorreo.match(correo) and (correo in self.Diccionario):
             correoValido= True
             claveCodificada = self.Diccionario[correo]
@@ -54,10 +51,11 @@ class clsSeguridad(object):
 
         if claveValida and correoValido:
             print("Usuario Aceptado")
-
+            
         if correoValido and not claveValida:
             print("Clave invalida")
 
         if not correoValido:
             print("Correo invalido")
-        print()
+        
+        return (claveValida and correoValido)
